@@ -18,7 +18,7 @@ public class GravityAction : Action
     public override void OnAdded(StateMachine stateMachine, State state)
     {
         m_Controller = stateMachine.GetComponent<CharacterController>();
-        m_YVelocity = m_Controller.velocity;y
+        m_YVelocity = m_Controller.velocity.y;
     }
     
     public override void OnUpdate()
