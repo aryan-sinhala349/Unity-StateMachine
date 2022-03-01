@@ -31,6 +31,11 @@ public class GravityAction : Action
         
         m_Controller.Move(Vector3.up * m_YVelocity * Time.deltaTime);
     }
+    
+    public override void OnRemoved()
+    {
+    
+    }
 }
 ```
 
@@ -54,6 +59,11 @@ public class CharacterControllerGroundedDecision : Decision
     public override bool Decide()
     {
         return m_Controller.isGrounded;
+    }
+    
+    public override void OnRemoved()
+    {
+    
     }
 }
 ```
