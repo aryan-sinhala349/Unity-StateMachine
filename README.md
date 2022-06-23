@@ -70,4 +70,18 @@ public class CharacterControllerGroundedDecision : Decision
 
 As you can see, the `OnUpdate` function from the `Action` class was replaced with a `Decide` function. `OnUpdate` doesn't need to be overridden in a class that extends `Action`, but `Decide` must be overridden in every class that extends `Decision`.
 
-To change states to somethign outside of the current network of states, just call `ChangeState` on the `StateMachine` and choose your new state. If you change to a `null` state, the current state will be cleared.
+An example `Action` and `Decision` are provided in the [`LogAction`](LogAction.cs) and [`DelayDecision`](DelayDecision.cs) classes, which can be used in your game.
+
+To change states to one outside of the current network of states, just call `ChangeState` on the `StateMachine` and choose your new state. If you change to a `null` state, the current state will be cleared.
+
+# Changelog
+- **Version 1.1**
+    - Added `DelayDecision`
+    - Added `LogAction`
+    - Modified `State` and `StateDecisionTree` to allow for multiple decisions that must all be met in order to change state.
+- **Version 1.0**
+    - Added `Action`
+    - Added `Decision`
+    - Added `State`
+    - Added `StateDecisionTree`
+    - Added `StateMachine`

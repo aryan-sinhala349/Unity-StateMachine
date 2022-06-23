@@ -26,7 +26,12 @@ public class State : ScriptableObject
 
         //Add all the decisions to this state
         for (int i = 0; i < m_Decisions.Length; i++)
-            m_Decisions[i].m_Decision.OnAdded(stateMachine, this);
+        {
+            StateDecisionTree decisionTree = m_Decisions[i];
+
+            for (int j = 0; j < decisionTree.m_Decisions.Length; j++)
+                decisionTree.m_Decisions[i].OnAdded(stateMachine, this);
+        }
     }
 
     /// <summary>
@@ -42,7 +47,18 @@ public class State : ScriptableObject
         for (int i = 0; i < m_Decisions.Length; i++)
         {
             //Decide what the new state should be
-            bool decision = m_Decisions[i].m_Decision.Decide();
+            StateDecisionTree decisionTree = m_Decisions[i];
+            bool decision = true;
+
+            for (int j = 0; j < decisionTree.m_Decisions.Length; j++)
+            {
+                if (!decisionTree.m_Decisions[j].Decide())
+                {
+                    decision = false;
+                    break;
+                }
+            }
+
             State newState = decision ? m_Decisions[i].m_TrueState : m_Decisions[i].m_FalseState;
 
             //If it is a valid state, change to that state and exit this loop
@@ -65,6 +81,11 @@ public class State : ScriptableObject
 
         //Remove all the state decision trees
         for (int i = 0; i < m_Decisions.Length; i++)
-            m_Decisions[i].m_Decision.OnRemoved();
+        {
+            StateDecisionTree decisionTree = m_Decisions[i];
+
+            for (int j = 0; j < decisionTree.m_Decisions.Length; j++)
+                decisionTree.m_Decisions[i].OnRemoved();
+        }
     }
 }
