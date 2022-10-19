@@ -5,5 +5,5 @@ public class LogAction : Action
 {
     [SerializeField] private string m_Message;
 
-    public override void OnAdded(StateMachine stateMachine, State state) => Debug.Log(m_message);
+    public override void OnAdded(StateMachine stateMachine, State state) => Debug.Log(m_Message);
 }
